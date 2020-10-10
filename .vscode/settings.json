@@ -1,0 +1,6 @@
+{
+    "haxe.configurations": [
+        ["build/xorshift.hxml"],
+        // ["build/lcg.hxml"]
+    ]
+}
