@@ -1,18 +1,21 @@
+# park-miller.py
+
 from time import time
 
 
 def park_miller(seed, size):
-    result = 0
-    mod = 0
-    if size % 32:
-        mod = 1
+    while True:
+        result = 0
+        mod = 0
+        if size % 32:
+            mod = 1
 
-    for i in range(int(size / 32) + mod):
-        seed = (16807 * seed) % 0x7FFFFFFF  # 32 bits
-        result = (result << 32) + seed
+        for i in range(int(size / 32) + mod):
+            seed = (16807 * seed) % 0x7FFFFFFF  # 32 bits
+            result = (result << 32) + seed
 
-    result = result >> int(mod * (32 - (size % 32)))
-    return result
+        result = result >> int(mod * (32 - (size % 32)))
+        yield result
 
 
 if __name__ == "__main__":
@@ -22,7 +25,8 @@ if __name__ == "__main__":
     for size in sizes:
         # contabilizando os milissegundos de execucao
         start_time = time()
-        res = park_miller(seed, size)
+        generator = park_miller(seed, size)
+        res = next(generator)
         end_time = time()
 
         # tabelas de resultado

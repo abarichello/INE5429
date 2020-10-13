@@ -1,3 +1,5 @@
+# xorshift.py
+
 from time import time
 
 # Xorshift variação xorwow como definido na
